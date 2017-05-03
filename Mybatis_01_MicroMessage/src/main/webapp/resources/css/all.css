@@ -13,7 +13,7 @@ strong { font-weight:700; }
 .fix { clear:both; zoom:1; }
 .fix:after{ display:block; clear:both; height:0; overflow:hidden; visibility:hidden; content:"."; } 
 /* =body= */
-body { font:12px/18px Arial, Helvetica, sans-serif,"宋体"; color:#6e6e6e; background:#1b5799 url(../images/bodybg.png) repeat-x;}
+body { font:12px/18px Arial, Helvetica, sans-serif,"宋体"; color:#6e6e6e; background:#1b5799 url(../images/bodybg.png) repeat-x;min-width: 680px}
 a { color:#266392; text-decoration:none;}
 a:hover { text-decoration:underline;}
 input, select, teatarea { font:12px Arial, Helvetica, sans-serif; }
@@ -289,3 +289,4 @@ input, select, teatarea { font:12px Arial, Helvetica, sans-serif; }
 .l-box-select .l-box-select-table td{ padding:2px; text-align:left;}
 .l-box-select .l-table-nocheckbox td.l-selected{ background-color:#FFBD69;}
 .l-box-select .l-table-nocheckbox td:hover,.l-box-select .l-table-nocheckbox td.l-over{ background-color:#FFE7A2; cursor:pointer;}
+

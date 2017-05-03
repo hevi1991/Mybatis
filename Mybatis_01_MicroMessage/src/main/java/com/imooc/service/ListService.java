@@ -3,7 +3,6 @@ package com.imooc.service;
 import com.imooc.bean.Message;
 import com.imooc.dao.MessageDao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
