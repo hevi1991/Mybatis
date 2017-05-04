@@ -16,6 +16,14 @@
         <servlet-name>DeleteBatchServlet</servlet-name>
         <servlet-class>com.imooc.servlet.DeleteBatchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InitTalkServlet</servlet-name>
+        <servlet-class>com.imooc.servlet.InitTalkServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AutoReplyServlet</servlet-name>
+        <servlet-class>com.imooc.servlet.AutoReplyServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListServlet</servlet-name>
         <url-pattern>/list.action</url-pattern>
@@ -27,6 +35,14 @@
     <servlet-mapping>
         <servlet-name>DeleteBatchServlet</servlet-name>
         <url-pattern>/deleteBatch.action</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InitTalkServlet</servlet-name>
+        <url-pattern>/initTalkServlet.action</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AutoReplyServlet</servlet-name>
+        <url-pattern>/autoReplyServlet.action</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>list.action</welcome-file>

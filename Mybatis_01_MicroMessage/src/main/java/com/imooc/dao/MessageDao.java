@@ -1,5 +1,6 @@
 package com.imooc.dao;
 
+import com.imooc.bean.Command;
 import com.imooc.bean.Message;
 import com.imooc.db.DBAccess;
 import org.apache.ibatis.session.SqlSession;
@@ -18,18 +19,26 @@ public class MessageDao {
     /**
      * 根据查询条件，查询消息列表
      */
-    public List<Message> queryMessageList(String command, String description) {
+    public List<Command> queryMessageList(String name, String description) {
         DBAccess dbAccess = new DBAccess();
-        List<Message> messageList = null;
+        List<Command> messageList = null;
         SqlSession sqlSession = null;
         try {
             sqlSession = dbAccess.getSqlSession();
             //封装查询的属性，并作为参数传递给配置文件
-            Message message = new Message();
-            message.setCommand(command);
-            message.setDescription(description);
+            Command command = new Command();
+            command.setName(name);
+            command.setDescription(description);
+
+            /*Message message = new Message();
+            message.setCommand(name);
+            message.setDescription(description);*/
+
             //通过sqlSession执行SQL语句
-            messageList = sqlSession.selectList("Message.queryMessageList", message);//对应Message.xml里面 命名空间+.+select的id
+            //messageList = sqlSession.selectList("Message.queryMessageList", message);//对应Message.xml里面 命名空间+.+select的id
+            messageList = sqlSession.selectList("Command.queryCommandList", command);//更改数据库了，需要换成Command Bean结构
+
+            
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -52,7 +61,7 @@ public class MessageDao {
         try {
             sqlSession = dbAccess.getSqlSession();
             //通过sqlSession执行SQL语句
-            sqlSession.delete("Message.deleteOne", id);//对应Message.xml里面 命名空间+.+select的id
+            sqlSession.delete("Command.deleteOne", id);//对应Message.xml里面 命名空间+.+select的id
             sqlSession.commit();//mysql的增删改有事务控制，需要提交事务
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,7 +83,7 @@ public class MessageDao {
         try {
             sqlSession = dbAccess.getSqlSession();
             //通过sqlSession执行SQL语句
-            sqlSession.delete("Message.deleteBatch", list);
+            sqlSession.delete("Command.deleteBatch", list);
             sqlSession.commit();
         } catch (IOException e) {
             e.printStackTrace();

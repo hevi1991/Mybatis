@@ -1,7 +1,8 @@
 package com.imooc.servlet;
 
+import com.imooc.bean.Command;
 import com.imooc.bean.Message;
-import com.imooc.service.ListService;
+import com.imooc.service.QueryService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,19 +18,19 @@ import java.util.List;
  */
 public class ListServlet extends HttpServlet {
 
-    ListService ls = new ListService();
+    QueryService queryService = new QueryService();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //解决编码问题
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         //接收值，设置值
-        String command = request.getParameter("command");
+        String name = request.getParameter("name");
         String description = request.getParameter("description");
-        request.setAttribute("command",command);
+        request.setAttribute("name",name);
         request.setAttribute("description",description);
         //调服务
-        List<Message> messageList = ls.queryMessageList(command, description);
+        List<Command> messageList = queryService.queryMessageList(name, description);
         //填入数据，转发
         request.setAttribute("messageList", messageList);
         request.getRequestDispatcher("/WEB-INF/jsp/back/list.jsp").forward(request, response);

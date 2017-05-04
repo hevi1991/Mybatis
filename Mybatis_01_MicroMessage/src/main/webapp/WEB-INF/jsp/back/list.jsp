@@ -30,7 +30,7 @@
                 <tr>
                     <td width="90" align="right">指令名称：</td>
                     <td>
-                        <input type="text" name="command" class="allInput" value=""/>
+                        <input type="text" name="name" class="allInput" value=""/>
                     </td>
                     <td width="90" align="right">描述：</td>
                     <td>
@@ -55,7 +55,7 @@
                                 <%--同样的name会生成一个String数组，提交到servlet--%>
                             <td><input type="checkbox" name="id" value=${message.id} /></td>
                             <td>${status.index+1}</td>
-                            <td>${message.command}</td>
+                            <td>${message.name}</td>
                             <td>${message.description}</td>
                             <td>
                                 <a href="#">修改</a>&nbsp;&nbsp;&nbsp;
