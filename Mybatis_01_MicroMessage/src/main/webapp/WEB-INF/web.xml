@@ -24,6 +24,14 @@
         <servlet-name>AutoReplyServlet</servlet-name>
         <servlet-class>com.imooc.servlet.AutoReplyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InitAddServlet</servlet-name>
+        <servlet-class>com.imooc.servlet.InitAddServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubmitCommandServlet</servlet-name>
+        <servlet-class>com.imooc.servlet.SubmitCommandServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListServlet</servlet-name>
         <url-pattern>/list.action</url-pattern>
@@ -43,6 +51,14 @@
     <servlet-mapping>
         <servlet-name>AutoReplyServlet</servlet-name>
         <url-pattern>/autoReplyServlet.action</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InitAddServlet</servlet-name>
+        <url-pattern>/addServlet.action</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitCommandServlet</servlet-name>
+        <url-pattern>/submitMaintain.action</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>list.action</welcome-file>

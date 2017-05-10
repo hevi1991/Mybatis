@@ -40,7 +40,9 @@ public class ListServlet extends HttpServlet {
         }
 
         //调服务
-        List<Command> messageList = queryService.queryMessageList(name, description, page);
+        //List<Command> messageList = queryService.queryMessageList(name, description, page);
+        List<Command> messageList = queryService.queryCommandListByPage(name, description, page);
+
         //填入数据，转发
         request.setAttribute("messageList", messageList);
         request.setAttribute("name",name);

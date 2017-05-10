@@ -1,6 +1,7 @@
 package com.imooc.dao;
 
 import com.imooc.bean.Command;
+import com.imooc.bean.CommandContent;
 import com.imooc.db.DBAccess;
 import com.imooc.entity.Page;
 import org.apache.ibatis.session.SqlSession;
@@ -51,7 +52,8 @@ public class MessageDao {
         try {
             sqlSession = dbAccess.getSqlSession();
             //通过sqlSession执行SQL语句
-            sqlSession.delete("Command.deleteOne", id);//对应Message.xml里面 命名空间+.+select的id
+            ICommand mapper = sqlSession.getMapper(ICommand.class);
+            mapper.deleteOne(id);
             sqlSession.commit();//mysql的增删改有事务控制，需要提交事务
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,7 +75,8 @@ public class MessageDao {
         try {
             sqlSession = dbAccess.getSqlSession();
             //通过sqlSession执行SQL语句
-            sqlSession.delete("Command.deleteBatch", list);
+            ICommand mapper = sqlSession.getMapper(ICommand.class);
+            mapper.deleteBatch(list);
             sqlSession.commit();
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,7 +95,7 @@ public class MessageDao {
         try {
             sqlSession = dbAccess.getSqlSession();
             ICommand mapper = sqlSession.getMapper(ICommand.class);
-             count = mapper.count(command);
+            count = mapper.count(command);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -100,7 +103,53 @@ public class MessageDao {
         return count;
     }
 
+    /**
+     * 使用拦截器，完成分页功能
+     *
+     * @param parameter
+     * @return
+     */
+    public List<Command> queryMessageListByPage(Map<String, Object> parameter) {
+        DBAccess dbAccess = new DBAccess();
+        List<Command> messageList = new ArrayList<Command>();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = dbAccess.getSqlSession();
+            ICommand mapper = sqlSession.getMapper(ICommand.class);
+            messageList = mapper.queryMessageListByPage(parameter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return messageList;
+    }
 
+    public void insertCommand(Command command){
+        DBAccess dbAccess = new DBAccess();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = dbAccess.getSqlSession();
+            ICommand mapper = sqlSession.getMapper(ICommand.class);
+            mapper.addCommand(command);
+            sqlSession.commit();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertContents(List<CommandContent> list) {
+        DBAccess dbAccess = new DBAccess();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = dbAccess.getSqlSession();
+            ICommandContent mapper = sqlSession.getMapper(ICommandContent.class);
+            mapper.insertBatch(list);
+            sqlSession.commit();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     /**

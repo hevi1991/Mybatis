@@ -43,8 +43,12 @@ public class QueryService {
      */
     public String queryByCommand(String name) {
         List<Command> messageList = null;
+        Map<String ,Object> map = new HashMap<String, Object>();
+
         if(Iconst.HELP_COMMAND.equals(name)) {
-            messageList = md.queryMessageList(null);
+            Command command = new Command();
+            map.put("command",command);
+            messageList = md.queryMessageList(map);
             StringBuilder result = new StringBuilder();
             for(int i = 0; i < messageList.size(); i++) {
                 if(i != 0) {
@@ -57,7 +61,6 @@ public class QueryService {
 
         Command command = new Command();
         command.setName(name);
-        Map<String ,Object> map = new HashMap<String, Object>();
         map.put("command",command);
 
         messageList = md.queryMessageList(map);
@@ -69,9 +72,19 @@ public class QueryService {
         return Iconst.NO_MATCHING_CONTENT;
     }
 
-    public static void main(String arg[]){
-        QueryService qs = new QueryService();
-        String check = qs.queryByCommand("查看");
-        System.out.println(check);
+    public List<Command> queryCommandListByPage(String name,String description,Page page){
+        Map<String ,Object> parameter = new HashMap<String, Object>();
+        Command command = new Command();
+        command.setName(name);
+        command.setDescription(description);
+
+        int totalNumber = md.count(command);
+        page.setTotalNumber(totalNumber);
+
+        parameter.put("command",command);
+        parameter.put("page",page);
+        return md.queryMessageListByPage(parameter);
     }
+
+
 }
